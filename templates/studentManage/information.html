@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生信息列表</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        select {
+            padding: 5px;
+            width: 200px;
+            height: 40px;
+        }
+
+        input[type="submit"] {
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100px;
+            height: 40px;
+        }
+
+        input:hover {
+            background-color: #0066cc;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            margin: 0 5px;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+
+    <script type="text/javascript">
+            function openSelect(obj){
+                var element=document.getElementById("student");
+                element.onclick = demo();
+            }
+
+            function demo(){
+                student.focus();
+                var WshShell = new ActiveXObject("Wscript.Shell");
+                try {
+                    WshShell.SendKeys("%{DOWN}");
+                } catch(e){}
+                WshShell.Quit;
+            }
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        <form method="GET" action="{% url 'new_studentinformation' %}">
+            <select name="faculty" id="student" onmouseover="openSelect(this);">
+                <option value="">全部院系</option>
+                <option value="数学与信息学院">数学与信息学院</option>
+                <option value="物理院">物理院</option>
+                <option value="文学院">文学院</option>
+                <option value="历史学院">历史学院</option>
+                <option value="化工院">化工院</option>
+                <option value="体育学院">体育学院</option>
+                <option value="外语学院">外语学院</option>
+            </select>
+            <input type="submit" value="筛选">
+        </form>
+        <table>
+            <tr>
+                <th>学生学号</th>
+                <th>学生姓名</th>
+                <th>学生电话</th>
+                <th>学生院系</th>
+                <th>学生专业</th>
+                <th>学生地址</th>
+            </tr>
+            {% for stu in new_studentinformation %}
+                <tr>
+                    <td>{{ stu.0 }}</td> <!-- 学生学号 -->
+                    <td>{{ stu.1 }}</td> <!-- 学生姓名 -->
+                    <td>{{ stu.2 }}</td> <!-- 学生电话 -->
+                    <td>{{ stu.3 }}</td> <!-- 学生院系 -->
+                    <td>{{ stu.4 }}</td> <!-- 学生专业 -->
+                    <td>{{ stu.5 }}</td> <!-- 学生地址 -->
+                </tr>
+            {% endfor %}
+        </table>
+        <div class="pagination">
+            {% for page_num in pages %}
+                {% if page_num == current_page %}
+                    <a href="?page={{ page_num }}" class="active">{{ page_num }}</a>
+                {% else %}
+                    <a href="?page={{ page_num }}">{{ page_num }}</a>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <a href="javascript:history.back()">返回上一页</a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>删除学生信息</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: #0066cc;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+        }
+
+        form input[type="text"] {
+            display: block;
+            width: 80%;
+            height: 40px;
+            padding: 10px;
+            margin: 10px auto 30px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .bc {
+            display: block;
+            width: 100%;
+            max-width: 200px;
+            height: 45px;
+            background-color: #0066cc;
+            color: #fff;
+            font-size: 18px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            margin: 20px auto;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .bc:hover {
+            background-color: #008000;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+        h2{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h1>请输入你要想要删除的学生学号</h1>
+<form method="post" action="/student/delete/">
+    {% csrf_token %}
+    学生学号：<input type="text" name="stu_id" placeholder={{ stu_id }}><br>
+    <input class="bc" type="submit" value="删除">
+    <a href="javascript:history.back()">返回上一页</a>
+</form>
+{% if msg %}
+    <h2 style="color: red">{{ msg }}</h2>
+{% endif %}
+</body>
+</html>

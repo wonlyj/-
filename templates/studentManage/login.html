@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录界面</title>
+    <style>
+        body {
+            height: 100%;
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+
+        .main-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 80px;
+            background-color: #f2f2f2;
+        }
+
+        .main-header span {
+            font-size: 24px;
+            color: #0066cc;
+        }
+
+        form {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-width: 0px;
+            border-bottom: 1px solid #999999;
+            background-color: transparent;
+            font-size: 16px;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-bottom: 1px solid #0066cc;
+        }
+
+        input[type="submit"]:hover {
+            cursor: pointer;
+        }
+
+        .tj {
+            display: block;
+            width: 100%;
+            padding: 12px 20px;
+            margin: 30px 0;
+            background-color: #0066cc;
+            color: #ffffff;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.25s;
+        }
+
+        .tj:hover {
+            background-color: #008000;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+
+    </style>
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+</head>
+<body>
+<div class="main-header">
+    <span>你好：{{ status }}</span>
+</div>
+{#<span style="font-size: 24px; color: #0066cc;">你好：{{ status }}</span>#}
+<form method="post" action="/student/login/">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="用户名:"/><br>
+    <input type="password" name="password" placeholder="密  码:"/><br>
+    <input class="tj" type="submit" value="登录"/>
+</form>
+<form method="get" action="/student/regist/">
+    <input type="submit" value="还没有账号，去注册"/>
+</form>
+    <div id="supersized" class="speed" style="visibility: visible;">
+        <li class="slide-0 prevslide" style="visibility: visible; opacity: 0.2;"><a target="_blank"><img src="/static/img/4.jpg" style="width: auto; left: auto; top: 0px; height: auto;">
+        </a></li>
+    </div>
+</body>
+<script type="text/javascript" src="/static/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="/static/js/supersized-init.js"></script>
+<script type="text/javascript" src="/static/js/supersized.3.2.7.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.validate.min.js"></script>
+</html>
